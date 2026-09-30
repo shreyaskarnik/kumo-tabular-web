@@ -1,5 +1,7 @@
 # Kumo Tabular in the browser
 
+**Live demo:** [huggingface.co/spaces/shreyask/kumo-tabular-web](https://huggingface.co/spaces/shreyask/kumo-tabular-web) · **Models:** [classifier](https://huggingface.co/onnx-community/kumo-tabular-small-classifier-ONNX), [regressor](https://huggingface.co/onnx-community/kumo-tabular-small-regressor-ONNX)
+
 Drop a CSV or Parquet file, pick a target column, get zero-shot predictions from
 NVIDIA's [Kumo Tabular](https://huggingface.co/nvidia/Kumo-Tabular) (Small, 28M),
 with no server. DuckDB-WASM loads and queries the data; the model runs as ONNX
@@ -14,7 +16,7 @@ on WebGPU (WASM fallback) through Transformers.js.
 - `web/`: Vite + TypeScript app. `src/kumo/preprocess.ts` ports sdm's default
   recipe (estimator 0, without the random augmentations); `src/db.ts` is the
   DuckDB layer; `src/worker.ts` runs the model.
-- `models/` (not committed): the exported ONNX repos.
+- `models/` (not committed): the exported ONNX repos, published as onnx-community/kumo-tabular-small-{classifier,regressor}-ONNX. The app loads them from the Hub; `?models=local` serves `web/public/models` instead.
 
 ## Checks
 
