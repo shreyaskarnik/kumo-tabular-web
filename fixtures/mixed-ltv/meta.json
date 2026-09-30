@@ -1,0 +1,32 @@
+{
+ "name": "mixed-ltv",
+ "task": "regression",
+ "target": "ltv",
+ "context": 380,
+ "rows": 500,
+ "stypes": {
+  "city": "categorical",
+  "plan": "categorical",
+  "tenure": "numerical",
+  "spend": "numerical",
+  "tickets": "numerical",
+  "constant": "numerical",
+  "active": "categorical",
+  "ltv": "numerical"
+ },
+ "classes": null,
+ "x": [
+  500,
+  7
+ ],
+ "y": [
+  380
+ ],
+ "logits": [
+  120,
+  999
+ ],
+ "pred": [
+  120
+ ]
+}

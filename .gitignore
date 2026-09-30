@@ -1,0 +1,7 @@
+node_modules/
+dist/
+.venv/
+export/sdm-src/
+models/
+fixtures/raw/
+__pycache__/

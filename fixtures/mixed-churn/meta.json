@@ -1,0 +1,36 @@
+{
+ "name": "mixed-churn",
+ "task": "classification",
+ "target": "churn",
+ "context": 450,
+ "rows": 600,
+ "stypes": {
+  "city": "categorical",
+  "plan": "categorical",
+  "tenure": "numerical",
+  "spend": "numerical",
+  "tickets": "numerical",
+  "constant": "numerical",
+  "active": "categorical",
+  "churn": "categorical"
+ },
+ "classes": [
+  "no",
+  "yes"
+ ],
+ "x": [
+  600,
+  7
+ ],
+ "y": [
+  450
+ ],
+ "logits": [
+  150,
+  10
+ ],
+ "pred": [
+  150,
+  2
+ ]
+}

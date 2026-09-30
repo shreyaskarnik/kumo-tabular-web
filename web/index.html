@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Kumo Tabular in the Browser</title>
+    <meta name="description" content="Zero-shot tabular predictions on your own CSV or Parquet file with NVIDIA Kumo Tabular, DuckDB-WASM and WebGPU. Nothing leaves your browser." />
+    <link rel="stylesheet" href="/src/style.css" />
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 16 16%22%3E%3Crect width=%2216%22 height=%2216%22 rx=%223%22 fill=%22%2376b900%22/%3E%3Cpath d=%22M4 4h8M4 8h8M4 12h8%22 stroke=%22white%22 stroke-width=%221.5%22/%3E%3C/svg%3E" />
+  </head>
+  <body>
+    <header class="top">
+      <div class="brand">
+        <h1>Kumo Tabular <span>in the browser</span></h1>
+        <p>
+          Drop a CSV or Parquet file, pick a column, get predictions. NVIDIA's
+          <a href="https://huggingface.co/nvidia/Kumo-Tabular" target="_blank" rel="noreferrer">Kumo Tabular</a>
+          learns from your labeled rows in one forward pass: no training, no server. Your data stays on this page.
+        </p>
+      </div>
+      <div class="badges">
+        <span id="device-badge" class="badge">checking GPU…</span>
+        <span class="badge">DuckDB-WASM</span>
+        <span class="badge">Small · 28M</span>
+      </div>
+    </header>
+
+    <main>
+      <section class="card" id="data-card">
+        <div class="card-head">
+          <h2><span class="step">1</span> Data</h2>
+          <span id="data-summary" class="muted"></span>
+        </div>
+        <label id="drop" class="drop">
+          <input id="file" type="file" accept=".csv,.parquet,.tsv,.txt" hidden />
+          <strong>Drop a CSV or Parquet file</strong>
+          <span class="muted">or click to choose one. It is read locally by DuckDB.</span>
+        </label>
+        <div class="samples">
+          <span class="muted">Or try:</span>
+          <button data-sample="churn_synthetic.csv" data-target="churn">Churn (150 unlabeled rows)</button>
+          <button data-sample="breast_cancer.csv" data-target="diagnosis">Breast cancer</button>
+          <button data-sample="iris.csv" data-target="species">Iris</button>
+          <button data-sample="california_housing.csv" data-target="MedHouseVal">California housing</button>
+          <button data-sample="diabetes.csv" data-target="progression">Diabetes</button>
+        </div>
+        <details id="sql-details">
+          <summary>Filter or reshape with SQL</summary>
+          <p class="muted">The model sees the result of this query. The file is table <code>source</code>.</p>
+          <textarea id="sql" spellcheck="false">SELECT * FROM source</textarea>
+          <button id="apply-sql" class="secondary">Apply</button>
+        </details>
+      </section>
+
+      <section class="card" id="setup-card" hidden>
+        <div class="card-head">
+          <h2><span class="step">2</span> What to predict</h2>
+        </div>
+        <div class="setup">
+          <label>Target column <select id="target"></select></label>
+          <label>Task
+            <select id="task">
+              <option value="classification">Classification (up to 10 classes)</option>
+              <option value="regression">Regression</option>
+            </select>
+          </label>
+          <label>Rows to predict
+            <select id="mode">
+              <option value="missing">Rows where the target is empty</option>
+              <option value="holdout">Hold out 20% and score them</option>
+            </select>
+          </label>
+        </div>
+        <p id="split-note" class="muted"></p>
+        <div class="columns-head">
+          <span>Features</span>
+          <span class="muted">numbers are numerical; text and booleans are categorical</span>
+        </div>
+        <div id="columns" class="columns"></div>
+        <div class="run-row">
+          <button id="run" class="primary">Predict</button>
+          <div id="progress" class="progress" hidden><div></div></div>
+          <span id="status" class="muted"></span>
+        </div>
+      </section>
+
+      <section class="card" id="results-card" hidden>
+        <div class="card-head">
+          <h2><span class="step">3</span> Predictions</h2>
+          <span id="timing" class="muted"></span>
+        </div>
+        <div id="metrics" class="metrics"></div>
+        <div class="results-grid">
+          <div id="chart" class="chart"></div>
+          <div class="table-wrap"><table id="preview"></table></div>
+        </div>
+        <details open>
+          <summary>Query the predictions with SQL</summary>
+          <p class="muted">Tables: <code>source</code>, <code>data</code>, <code>predictions</code>, and <code>results</code> (data joined with predictions).</p>
+          <textarea id="query" spellcheck="false"></textarea>
+          <div class="run-row">
+            <button id="run-query" class="secondary">Run query</button>
+            <button id="download" class="secondary">Download results.csv</button>
+          </div>
+          <div class="table-wrap"><table id="query-out"></table></div>
+        </details>
+      </section>
+    </main>
+
+    <footer>
+      Model: <a href="https://huggingface.co/nvidia/Kumo-Tabular" target="_blank" rel="noreferrer">nvidia/Kumo-Tabular</a>
+      (Small, OpenMDW-1.1), converted to ONNX. Preprocessing ports
+      <a href="https://github.com/NVIDIA/structured-data-models" target="_blank" rel="noreferrer">structured-data-models</a>'
+      default recipe (one estimator) and matches it value for value. Runs with
+      <a href="https://huggingface.co/docs/transformers.js" target="_blank" rel="noreferrer">Transformers.js</a> and
+      <a href="https://duckdb.org/docs/api/wasm/overview" target="_blank" rel="noreferrer">DuckDB-WASM</a>.
+    </footer>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

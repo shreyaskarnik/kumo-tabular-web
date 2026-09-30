@@ -1,0 +1,23 @@
+{
+  "name": "kumo-tabular-web",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@duckdb/duckdb-wasm": "^1.33.1-dev57.0",
+    "@huggingface/transformers": "^4.3.0",
+    "apache-arrow": "^17.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.3",
+    "typescript": "^7.0.2",
+    "vite": "^8.3.1",
+    "vitest": "^4.1.11"
+  }
+}

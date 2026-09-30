@@ -1,0 +1,35 @@
+{
+ "name": "diabetes",
+ "task": "regression",
+ "target": "target",
+ "context": 300,
+ "rows": 442,
+ "stypes": {
+  "age": "numerical",
+  "sex": "numerical",
+  "bmi": "numerical",
+  "bp": "numerical",
+  "s1": "numerical",
+  "s2": "numerical",
+  "s3": "numerical",
+  "s4": "numerical",
+  "s5": "numerical",
+  "s6": "numerical",
+  "target": "numerical"
+ },
+ "classes": null,
+ "x": [
+  442,
+  10
+ ],
+ "y": [
+  300
+ ],
+ "logits": [
+  142,
+  999
+ ],
+ "pred": [
+  142
+ ]
+}

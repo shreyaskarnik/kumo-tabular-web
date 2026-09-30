@@ -1,0 +1,59 @@
+{
+ "name": "breast-cancer",
+ "task": "classification",
+ "target": "target",
+ "context": 400,
+ "rows": 569,
+ "stypes": {
+  "mean radius": "numerical",
+  "mean texture": "numerical",
+  "mean perimeter": "numerical",
+  "mean area": "numerical",
+  "mean smoothness": "numerical",
+  "mean compactness": "numerical",
+  "mean concavity": "numerical",
+  "mean concave points": "numerical",
+  "mean symmetry": "numerical",
+  "mean fractal dimension": "numerical",
+  "radius error": "numerical",
+  "texture error": "numerical",
+  "perimeter error": "numerical",
+  "area error": "numerical",
+  "smoothness error": "numerical",
+  "compactness error": "numerical",
+  "concavity error": "numerical",
+  "concave points error": "numerical",
+  "symmetry error": "numerical",
+  "fractal dimension error": "numerical",
+  "worst radius": "numerical",
+  "worst texture": "numerical",
+  "worst perimeter": "numerical",
+  "worst area": "numerical",
+  "worst smoothness": "numerical",
+  "worst compactness": "numerical",
+  "worst concavity": "numerical",
+  "worst concave points": "numerical",
+  "worst symmetry": "numerical",
+  "worst fractal dimension": "numerical",
+  "target": "categorical"
+ },
+ "classes": [
+  "0",
+  "1"
+ ],
+ "x": [
+  569,
+  30
+ ],
+ "y": [
+  400
+ ],
+ "logits": [
+  169,
+  10
+ ],
+ "pred": [
+  169,
+  2
+ ]
+}
